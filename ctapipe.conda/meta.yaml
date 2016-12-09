@@ -1,0 +1,49 @@
+package:
+  name: ctapipe
+  version: "0.1dev"
+
+source:
+  git_rev: master
+  git_url: https://github.com/cta-observatory/ctapipe.git
+
+build:
+  string: py3
+  number: 1  # increment if new build is done without changing version
+  
+  entry_points:
+    # here must list everything in the entry_points in ctapipe's setup.py
+    - ctapipe-info = ctapipe.tools.info:main
+    - ctapipe-camdemo = ctapipe.tools.camdemo:main
+    - ctapipe-dump-triggers = ctapipe.tools.dump_triggers:main
+    - ctapipe-flow = ctapipe.flow.flow:main
+    
+requirements:
+  build:
+    # these must match the install_requires list in ctapipe's setup.py
+    # they should be reduced to the minimum
+    - python >=3.4
+    - setuptools
+    - astropy
+    - matplotlib
+    - scikit-learn
+    - scipy
+    - traitlets
+  run:
+    - python >=3.4
+    - astropy
+    - matplotlib
+    - scikit-learn
+    - scipy
+    - pyhessio
+    - traitlets
+    - numba
+    
+# test:
+#   imports:
+#     - ctapipe
+#   requires:
+#     - pytest
+
+about:
+  home: https://github.com/cta-observatory/ctapipe
+  license: BSD
