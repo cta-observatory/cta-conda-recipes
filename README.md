@@ -8,7 +8,7 @@ Update the package definition
 -----------------------------
 
 1. Create or select a version branch/tag of the package (e.g. v1.2)
-2. edit  `<package>.conda/meta.yaml:
+2. edit  `<package>.conda/meta.yaml`:
 
    - change the `git_rev` field to be the branch/tag name you chose
    - make sure the `entry_points` are the same as in the `setup.py`
