@@ -7,8 +7,7 @@ source:
   git_url: https://github.com/cta-observatory/ctapipe.git
 
 build:
-  string: py3
-  number: 1  # increment if new build is done without changing version
+  number: 2  # increment if new build is done without changing version
   
   entry_points:
     # here must list everything in the entry_points in ctapipe's setup.py
