@@ -38,7 +38,7 @@ requirements:
     - scipy
     - pyhessio >=1.0,<1.1
     - traitlets
-    - zmq
+    - pyzmq
     - graphviz
     
 test:
