@@ -57,14 +57,14 @@ ctapipe-info --version --dependencies --tools
 
 ```
 
-If all goes well, and you are the administrator for the
-cta-observatory channel on *Anaconda Cloud*, you can upload the
+If all goes well, and your account has upload access for the
+cta-observatory organization's channel on *Anaconda Cloud*, you can upload the
 packages like this:
 
 ```
 
-anaconda login --username cta-observatory
-anaconda upload <package files>
+anaconda login --username <your anaconda username>
+anaconda upload --username cta-observatory <package files>
 
 ```
 
