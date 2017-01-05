@@ -31,7 +31,7 @@ will give you the path to the package.
 conda build pyhessio.conda
 conda build ctapipe.conda
 
-conda build purge # to clean up if everything worked
+conda build purge # optional, to clean up if everything worked
 
 ```
 
