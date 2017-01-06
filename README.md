@@ -8,13 +8,16 @@ Create a new recipe for your revision
 -------------------------------------
 
 For *each* release, there should be a subdirectory in this repo called `<package>-<version>.conda/`
-that contains the recipe. This way we can build past versions as well in an automated fashion.  You do not need to keep separate dirs for each *build number*, just for released versions.  For example: `ctapipe-v0.2.0.conda/`
+that contains the recipe. This way we can build past versions as well in an automated fashion.  
+The `<version>` should be `major.minor` or `major.minor.sub`,  for example: `ctapipe-0.2.0.conda/`.
+For re-builds of the same version release  you do not need to create a new directory 
+(just increment the internal build number).
 
-Create the package recipe
---------------------------
+Create the recipe for your release
+----------------------------------
 
 1. create a subdir for your release as above.
-2. Create or select a version branch/tag of the package (e.g. v1.2)
+2. Create or select a version branch/tag of the package (e.g. v1.2.0)
 3. edit  `<package>.conda/meta.yaml` (copy it from previous version):
 
    - change the `git_rev` field to be the branch/tag name you chose
