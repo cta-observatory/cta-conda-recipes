@@ -4,17 +4,25 @@ Building conda packages for CTA
 The following information is for CTA pipelines code administrators to
 create packages (it is not needed by regular users)
 
-Update the package definition
------------------------------
+Create a new recipe for your revision
+-------------------------------------
 
-1. Create or select a version branch/tag of the package (e.g. v1.2)
-2. edit  `<package>.conda/meta.yaml`:
+For *each* release, there should be a subdirectory in this repo called `<package>-<version>.conda/`
+that contains the recipe. This way we can build past versions as well in an automated fashion.  You do not need to keep separate dirs for each *build number*, just for released versions.  For example: `ctapipe-v0.2.0.conda/`
+
+Create the package recipe
+--------------------------
+
+1. create a subdir for your release as above.
+2. Create or select a version branch/tag of the package (e.g. v1.2)
+3. edit  `<package>.conda/meta.yaml` (copy it from previous version):
 
    - change the `git_rev` field to be the branch/tag name you chose
    - make sure the `entry_points` are the same as in the `setup.py`
-     file of the main package
+     file of the main package, otherwise any command-line utils will not be
+     installed
    - make sure the `requirements/build` list is also the same as in
-     `setup.py` (any new dependencies must be added)
+     `setup.py` (any new dependencies should be added)
 
 
 Build the packages locally
@@ -28,8 +36,7 @@ will give you the path to the package.
 
 ```sh
 
-conda build pyhessio.conda
-conda build ctapipe.conda
+conda build <package name>.conda
 
 conda build purge # optional, to clean up if everything worked
 
@@ -52,7 +59,7 @@ setup a conda channel
 
 ```sh
 
-conda install --use-local ctapipe
+conda install --use-local ctapipe=<version>  # leave out =version to get latest
 ctapipe-info --version --dependencies --tools
 
 ```
