@@ -1,0 +1,20 @@
+package:
+  name: pyhessio
+  version: 2.0.0
+
+source:
+  url: https://github.com/cta-observatory/pyhessio/archive/v2.0.0.tar.gz
+  md5: 442d32d2d68789e5901c0fab8852ae40
+  
+build:
+  number: 1
+  binary_relocation: True
+  detect_binary_files_with_prefix: True
+
+requirements:
+  build:
+    - python
+    - numpy
+  run:
+    - python
+    - numpy
