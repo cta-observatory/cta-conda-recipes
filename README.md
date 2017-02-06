@@ -86,3 +86,7 @@ system to ensure compatiblity with all CTA machines.  However, if the
 package has no compiled C code in it, you can use `conda convert
 <package filename> -p <target>` to convert it automatically.  Targets
 are `osx-64` or `linux-64`
+
+To build for multiple python versions (e.g. 3.4, 3.5, 3.6), you need
+to re-run the conda build command with for example the `--python=3.5`
+option, once per python version, and upload all packages
