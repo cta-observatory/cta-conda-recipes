@@ -9,12 +9,12 @@ package:
 source:
   #path_url:
   # which branch/tag to use (should be a vX.X release)
-  git_rev: v0.3.3
+  git_rev: v0.3.4
   git_url: https://github.com/cta-observatory/ctapipe.git
 
   
 build:
-  number: 4  ###{{ GIT_DESCRIBE_NUMBER }}  # adds number of commits past git_rev
+  number: 1 ##{{ GIT_DESCRIBE_NUMBER }}  # adds number of commits past git_rev
   binary_relocation: True
   detect_binary_files_with_prefix: True
   
