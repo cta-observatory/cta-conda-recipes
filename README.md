@@ -39,8 +39,10 @@ will give you the path to the package.
 
 ```sh
 
-conda build <package name>.conda
+conda build [--python=<version>] <package name>.conda
 
+# for example:
+conda build --python=3.5 ctapipe-0.3.3.conda
 conda build purge # optional, to clean up if everything worked
 
 ```
