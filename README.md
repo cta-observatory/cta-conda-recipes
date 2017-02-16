@@ -98,7 +98,7 @@ Notes
 * For Linux, please *only build on a SL6.X* or 
  compatible system (SL6.8 is used currently) to ensure the package works on 
  CTA grid machines. Building on newer Linux distros will cause problems due to 
- changes in ~glibc~ that are not backward compatible.
+ changes in `glibc` that are not backward compatible.
 
 * To build for multiple python versions (e.g. 3.4, 3.5, 3.6), you need
  to re-run the conda build command with for example the `--python=3.5`
