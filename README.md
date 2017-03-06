@@ -59,8 +59,8 @@ source activate ctatest ipython
 
 Finally, try installing the new `ctapipe` package into this
 environment. You should get `pyhessio` and other dependencies
-automatically. For now you must use the `--use-local` option, until we
-setup a conda channel
+automatically. For now you must use the `--use-local` option, until the package
+is uploaded to Anaconda Cloud in the cta-observatory channel (see next step).
 
 ```sh
 
@@ -80,15 +80,26 @@ anaconda upload --username cta-observatory <package files>
 
 ```
 
+From then on, users can install the package via:
+
+```
+conda install -c cta-observatory <package>
+```
+
 Notes
 =====
 
-You must build each package on a 64-bit *macOS* system and a *linux*
-system to ensure compatiblity with all CTA machines.  However, if the
-package has no compiled C code in it, you can use `conda convert
-<package filename> -p <target>` to convert it automatically.  Targets
-are `osx-64` or `linux-64`
+* You must build each package on a 64-bit *macOS* system and a *linux*
+ system to ensure compatiblity with all CTA machines.  However, if the
+ package has no compiled C code in it, you can use `conda convert
+ <package filename> -p <target>` to convert it automatically.  Targets
+ are `osx-64` or `linux-64`.  
 
-To build for multiple python versions (e.g. 3.4, 3.5, 3.6), you need
-to re-run the conda build command with for example the `--python=3.5`
-option, once per python version, and upload all packages
+* For Linux, please *only build on a SL6.X* or 
+ compatible system (SL6.8 is used currently) to ensure the package works on 
+ CTA grid machines. Building on newer Linux distros will cause problems due to 
+ changes in `glibc` that are not backward compatible.
+
+* To build for multiple python versions (e.g. 3.4, 3.5, 3.6), you need
+ to re-run the conda build command with for example the `--python=3.5`
+ option, once per python version, and upload all packages
