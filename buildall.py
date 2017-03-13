@@ -6,7 +6,7 @@
 # usage: buildall.py <recipe>
 
 import sys
-from subprocess import call, check_output
+from subprocess import check_call, check_output, CalledProcessError
 
 PYTHON_VERSIONS = ['3.4', '3.5']
 
@@ -20,14 +20,16 @@ def build_and_upload_all(pkg):
 
     for ver in PYTHON_VERSIONS:
         subcommand = ['--python={}'.format(ver), '{}'.format(pkg)]
-        ret = call(build_command + subcommand)
-        if ret == 0:
+
+        try:
+            ret = call(build_command + subcommand)
+            
             print("UPLOADING...")
             output = check_output(build_command + ['--output', ] + subcommand)
             call(['anaconda', 'upload', '--user', 'cta-observatory', output])
-        else:
-            print("FAILED: {} for python {}".format(pkg, ver))
-            failed.append('{}:{}'.format(pkg, ver))
+            
+        except CalledProcessError as err
+            failed.append('{}:{}:{}'.format(pkg, ver, err))
 
     if len(failed) > 0:
         print("FAILED PACKAGES:\n", "\n".join(failed))
