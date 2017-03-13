@@ -22,13 +22,15 @@ def build_and_upload_all(pkg):
         subcommand = ['--python={}'.format(ver), '{}'.format(pkg)]
 
         try:
-            ret = call(build_command + subcommand)
-            
-            print("UPLOADING...")
+            print("*** BUILDING...", pkg, ver)
+            ret = check_call(build_command + subcommand)
+
+            print("*** UPLOADING...", pkg, ver)
             output = check_output(build_command + ['--output', ] + subcommand)
-            call(['anaconda', 'upload', '--user', 'cta-observatory', output])
-            
-        except CalledProcessError as err
+            check_call(['anaconda', 'upload', '--user',
+                        'cta-observatory', output])
+
+        except CalledProcessError as err:
             failed.append('{}:{}:{}'.format(pkg, ver, err))
 
     if len(failed) > 0:
