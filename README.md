@@ -43,8 +43,6 @@ conda build [--python=<version>] <package name>.conda
 
 # for example:
 conda build --python=3.5 ctapipe-0.3.3.conda
-conda build purge # optional, to clean up if everything worked
-
 ```
 
 Next, make a new clean conda environment to test that everything works
@@ -52,8 +50,8 @@ and all the dependencies are ok:
 
 ```sh
 
-conda create -n ctatest
-source activate ctatest ipython
+conda create -n ctatest 
+source activate ctatest 
 
 ```
 
