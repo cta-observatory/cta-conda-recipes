@@ -48,6 +48,8 @@ requirements:
     - traitlets
     - pyzmq
     - graphviz
+    - numba
+    - cython
 
 test:
   imports:
