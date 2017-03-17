@@ -1,4 +1,4 @@
-#!/bin/env python
+#!/usr/bin/env python
 
 # build a matrix of packages (e.g. multiple python versions) for a
 # given architecture and upload them
@@ -7,15 +7,18 @@
 
 import sys
 from subprocess import check_call, check_output, CalledProcessError
+from argparse import ArgumentParser
 
-PYTHON_VERSIONS = ['3.4', '3.5']
+PYTHON_VERSIONS = ['3.4', '3.5', '3.6']
+FAILED = []
 
 
 def build_and_upload_all(pkg):
 
-    failed = []
+    global FAILED
     build_command = ['conda-build', '--dirty']
 
+    print("=" * 70)
     print("BUILDING", pkg, "FOR PYTHON VERSIONS:", PYTHON_VERSIONS)
 
     for ver in PYTHON_VERSIONS:
@@ -26,17 +29,29 @@ def build_and_upload_all(pkg):
             ret = check_call(build_command + subcommand)
 
             print("*** UPLOADING...", pkg, ver)
-            output = check_output(build_command + ['--output', ] + subcommand)
+            output = str(check_output(build_command + ['--output', ]
+                                      + subcommand), 'utf8').strip()
+
             check_call(['anaconda', 'upload', '--user',
                         'cta-observatory', output])
 
         except CalledProcessError as err:
-            failed.append('{}:{}:{}'.format(pkg, ver, err))
-
-    if len(failed) > 0:
-        print("FAILED PACKAGES:\n", "\n".join(failed))
-
+            FAILED.append('{}:{}:{}'.format(pkg, ver, err))
+            print("FAILURE: {}:{}:{}".format(pkg, ver, err))
 
 if __name__ == '__main__':
 
-    build_and_upload_all(sys.argv[1])
+    par = ArgumentParser(description=('build conda packages for multiple'
+                                      ' python versions'))
+    par.add_argument('package', type=str, nargs='+',
+                     help='package recipe directory')
+    args = par.parse_args()
+
+    for package in args.package:
+        build_and_upload_all(package)
+
+    if len(FAILED) > 0:
+        print("=" * 70)
+        print("FAILURES:\n", "\n".join(FAILED))
+        sys.stdout.flush()
+        sys.exit(1)
