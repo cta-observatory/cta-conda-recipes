@@ -84,6 +84,19 @@ From then on, users can install the package via:
 conda install -c cta-observatory <package>
 ```
 
+Automatic Building for multiple Python Versions
+===============================================
+
+A script, `buildall.py` is included to run the above steps for several
+python versoins, to speed up creating packages. Use it as follows:
+
+```
+python buildall.py <package> [<package> ...]
+```
+
+It will build for each supported python version, and upload the
+package to anaconda cloud (assuming you are already logged in)
+
 Notes
 =====
 
