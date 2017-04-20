@@ -22,6 +22,7 @@ requirements:
   run:
     - python
     - cfitsio
+    - gammalib ==1.2
 
 about:
   home: cta.irap.omp.eu/ctools/releases/ctools/ctools-1.2.0.tar.gz
