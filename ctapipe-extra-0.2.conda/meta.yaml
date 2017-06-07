@@ -6,12 +6,10 @@ package:
   
 
 source:
-  #path: /Users/kosack/Projects/CTA/Working/ctapipe-extra
-  url: https://github.com/cta-observatory/ctapipe-extra/archive/v0.2.2.tar.gz
-  # which branch/tag to use (should be a vX.X release)
+  #url: https://github.com/cta-observatory/ctapipe-extra/archive/v0.2.6.tar.gz
   #git_rev: master
   #git_url: https://github.com/cta-observatory/ctapipe-extra.git
-
+  path: /Users/kosack/Projects/CTA/Working/ctapipe-extra
   
 build:
   noarch: python
