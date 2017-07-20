@@ -9,7 +9,7 @@ package:
 source:
   #path_url:
   # which branch/tag to use (should be a vX.X release)
-  git_rev: v0.5.0
+  git_rev: v0.5.1
   git_url: https://github.com/cta-observatory/ctapipe.git
 
   
