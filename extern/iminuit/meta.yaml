@@ -1,0 +1,60 @@
+{% set name = "iminuit" %}
+{% set version = "1.2" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "7651105fc3f186cfb5742f075ffebcc5088bf7797d8ed124c00977eebe0d1c64" %}
+
+package:
+  name: '{{ name|lower }}'
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.tar.gz'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  script: python setup.py install  --single-version-externally-managed --record=record.txt
+
+requirements:
+  build:
+    - python
+    - setuptools
+  run:
+    - python
+
+test:
+  imports:
+    - iminuit
+    - iminuit.frontends
+    - iminuit.tests
+
+about:
+  home: https://github.com/iminuit/iminuit
+  license: GNU General Public License (GPL) or MIT License
+  license_family: LGPL
+  license_file: ''
+  summary: Interactive Minimization Tools based on MINUIT
+  description: ".. image:: https://img.shields.io/pypi/v/iminuit.svg\n   :target: https://pypi.python.org/pypi/iminuit\n.. image:: https://img.shields.io/pypi/dm/iminuit.svg\n   :target: https://pypi.python.org/pypi/iminuit\n\
+    \niminuit\n-------\n\nInteractive IPython-Friendly Minimizer based on\n`SEAL Minuit2 <http://seal.web.cern.ch/seal/work-packages/mathlibs/minuit/release/download.html>`_.\n(A slightly modified version\
+    \ is included in the package no need to install it separately)\n\nIt is designed from ground up to be fast, interactive and cython friendly. iminuit\nextracts function signature very permissively starting\
+    \ from checking *func_code*\ndown to last resort of parsing docstring(or you could tell iminuit to stop looking\nand take your answer). The interface is inspired heavily\nby PyMinuit and the status\
+    \ printout is inspired by ROOT Minuit. iminuit is\nmostly compatible with PyMinuit(with few exceptions). Existing PyMinuit\ncode can be ported to iminuit by just changing the import statement.\n\nIn\
+    \ a nutshell::\n\n    from iminuit import Minuit\n    def f(x, y, z):\n        return (x - 2) ** 2 + (y - 3) ** 2 + (z - 4) ** 2\n    m = Minuit(f)\n    m.migrad()\n    print(m.values)  # {'x': 2,'y':\
+    \ 3,'z': 4}\n    print(m.errors)  # {'x': 1,'y': 1,'z': 1}\n\nInstall\n-------\n\nFirst install cython (`pip install cython`), then\n\n::\n\n    python setup.py install\n\nor from pip::\n\n    pip install\
+    \ iminuit\n\nFor Windows, Christoph Gohlke made a nice windows binary to save you all from Windows compilation nightmare:\n\n   `http://www.lfd.uci.edu/~gohlke/pythonlibs/#iminuit <http://www.lfd.uci.edu/~gohlke/pythonlibs/#iminuit>`_\n\
+    \nTutorial\n--------\n\nAll the tutorials are in tutorial directory. You can view it online too.\n\n- `Quick start <http://nbviewer.ipython.org/urls/raw.github.com/iminuit/iminuit/master/tutorial/tutorial.ipynb>`_\n\
+      - `Hard Core Cython tutorial <http://nbviewer.ipython.org/urls/raw.github.com/iminuit/iminuit/master/tutorial/hard-core-tutorial.ipynb>`_.\n  If you need to do a huge likelihood fit that needs speed,\
+    \ or you want to learn how to\n  parallelize your stuff, this is for you.\n\n\nDocumentation\n-------------\n\nhttp://iminuit.readthedocs.org/\n\nTechnical Stuff\n---------------\n\nUsing it as a black\
+    \ box is a bad idea. Here are some fun reads; the order is given\nby the order I think you should read.\n\n* Wikipedia for `Quasi Newton Method <http://en.wikipedia.org/wiki/Quasi-Newton_method>`_ and\n\
+    \  `DFP formula <http://en.wikipedia.org/wiki/Davidon-Fletcher-Powell_formula>`_.\n  The magic behind migrad.\n* `Variable Metric Method for Minimization <http://www.ii.uib.no/~lennart/drgrad/Davidon1991.pdf>`_\
+    \ William Davidon 1991\n* `A New Approach to Variable Metric Algorithm. <http://comjnl.oxfordjournals.org/content/13/3/317.full.pdf+html>`_ (R.Fletcher 1970)\n* Original Paper: `MINUIT - A SYSTEM FOR\
+    \ FUNCTION MINIMIZATION AND ANALYSIS OF THE PARAMETER ERRORS AND CORRELATIONS <http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.158.9157&rep=rep1&type=pdf>`_ by Fred James and Matts Roos.\n\n\
+    You can help\n------------\n\nGithub allows you to contribute to this project very easily just fork the\nrepository, make changes and submit a pull request.\n\nHere's the list of concrete open issues\
+    \ and feature requests:\nhttps://github.com/iminuit/iminuit\n\nMore generally any contribution to the docs, tests and package itself is welcome!\n\n* Documentation. Tell us what's missing, what's incorrect\
+    \ or misleading.\n* Tests. If you have an example that shows a bug or problem, please file an issue!\n* Performance. If you are a C/cython/python hacker go ahead and make it faster."
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: ''

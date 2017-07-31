@@ -14,7 +14,7 @@ source:
 build:
   noarch: python
   # string has to have just py in it for noarch build to work
-  string: py_0
+  #string: py_0
 
 requirements:
   build:
