@@ -73,8 +73,8 @@ packages like this:
 
 ```
 
-anaconda login --username <your anaconda username>
-anaconda upload --username cta-observatory <package files>
+anaconda login --user <your anaconda username>
+anaconda upload --user cta-observatory <package files>
 
 ```
 
