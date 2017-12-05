@@ -18,9 +18,11 @@ requirements:
     - setuptools
     - cfitsio
     - swig
+    - readline
   run:
     - python
     - cfitsio
+    - readline
 
 about:
   home: http://gammalib.sourceforge.net/
