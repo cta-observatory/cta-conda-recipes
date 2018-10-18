@@ -49,6 +49,7 @@ requirements:
     - pyhessio  >=2.0.1,<=3.0
     - ctapipe-extra >=0.2.13,<0.3
     - pandas
+    - yaml
   run:
     # these should be all packages that should be installed if ctapipe
     # is installed, so should include all necsesary dependencies
@@ -74,21 +75,21 @@ requirements:
     - pytest
     - ctapipe-extra >=0.2.9,<0.3
     - pandas
-    
+    - yaml
 
-test:
-  requires:
-    - pytest
-  imports:
-    - ctapipe
-    - ctapipe.io 
-    - ctapipe.core
-    - ctapipe.coordinates
-    - ctapipe.instrument
-    - ctapipe.visualization
-    - ctapipe.tools
-    - ctapipe.utils
-    - ctapipe.reco
+# test:
+#   requires:
+#     - pytest
+#   imports:
+#     - ctapipe
+#     - ctapipe.io 
+#     - ctapipe.core
+#     - ctapipe.coordinates
+#     - ctapipe.instrument
+#     - ctapipe.visualization
+#     - ctapipe.tools
+#     - ctapipe.utils
+#     - ctapipe.reco
 #  commands:
 #    - ctapipe-info --version
 
