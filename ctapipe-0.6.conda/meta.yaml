@@ -14,7 +14,7 @@ source:
 
   
 build:
-  number: 0
+  number: 1
    
   entry_points:
     # here must list everything in the entry_points in ctapipe's setup.py
