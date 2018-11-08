@@ -1,0 +1,23 @@
+{% set data = load_setup_py_data() %}
+
+package:
+  name: pyhessio
+  version: {{ data.get('version') }} # auto-fetch version from package	
+
+source:
+  git_rev: v2.0.3
+  git_url: https://github.com/cta-observatory/pyhessio.git
+
+  
+build:
+  number: 1
+  binary_relocation: True
+  detect_binary_files_with_prefix: True
+
+requirements:
+  build:
+    - python
+    - numpy
+  run:
+    - python
+    - numpy
