@@ -1,0 +1,25 @@
+package:
+  name: sparse2d
+  version: v2.1.1
+
+source:
+  git_rev: v2.1.1
+  git_url: https://github.com/CosmoStat/Sparse2D.git
+
+  
+build:
+  number: 1
+  binary_relocation: True
+  detect_binary_files_with_prefix: True
+
+requirements:
+  build:
+    - cmake
+    - cfitsio >=3
+  run:
+    - cfitsio >=3
+
+about:
+  home: http://www.cosmostat.org/software/isap
+  license: CeCILL
+  summary: Sparse2D provides an array of sparsity based tools and a convenient C++ library for performing various wavelet tranforms
