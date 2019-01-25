@@ -33,6 +33,7 @@ requirements:
     # they should be reduced to the minimum. They are the packages
     # needed to run python setup.py install
     - python {{ python }}
+    - {{ compiler('c') }}
     - setuptools
     - astropy >=1.3,<=3.0
     - matplotlib
