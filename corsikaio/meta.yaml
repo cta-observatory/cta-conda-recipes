@@ -1,0 +1,51 @@
+{% set name = "corsikaio" %}
+{% set version = "0.2.0" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 2bd2027147eb493a1b43f6d8384ddfdc8ebc12090b8a0b154c1081475d362cff
+
+build:
+  number: 0
+  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv "
+  noarch: python
+  
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - cython
+  host:
+    - numpy 1.13.*  # [py35]
+    - numpy 1.13.*  # [py36]
+    - numpy 1.14.*  # [py>=37]
+    - pip
+    - python
+    - setuptools
+    - pytest-runner
+  run:
+    - numpy
+    - python
+
+test:
+  imports:
+    - corsikaio
+    - corsikaio.subblocks
+  requires:
+    - pytest
+
+about:
+  home: http://github.com/fact-project/corsikaio
+  license: MIT
+  license_family: MIT
+  license_file: 
+  summary: Reader for corsika binary output files using numpy
+  doc_url: 
+  dev_url: 
+
+extra:
+  recipe-maintainers:
+    - kosack
