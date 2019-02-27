@@ -1,0 +1,52 @@
+{% set data = load_setup_py_data() %}
+
+package:
+  name: eventio
+  version: {{ data.get('version') }}
+
+source:
+  git_rev: v0.11.0
+  git_url: https://github.com/cta-observatory/pyeventio.git
+
+build:
+  detect_binary_files_with_prefix: False
+  entry_points:
+    - eventio_print_structure = eventio.scripts.print_structure:main
+    - eventio_plot_histograms = eventio.scripts.plot_hists:main
+    - eventio_print_object_information = eventio.scripts.print_object_information:main
+    - eventio_cut_file = eventio.scripts.cut_eventio_file:main
+  number: 0
+
+requirements:
+  build:
+    - cython
+  host:
+    - python
+    - setuptools
+    - numpy
+    - pytest-runner
+    - cython
+    - corsikaio 0.2.*
+  run:
+    - python
+    - {{ pin_compatible('numpy') }}
+    - corsikaio 0.2.*
+    
+test:
+  commands:
+    - eventio_print_structure --help
+  imports:
+    - eventio
+
+about:
+  home: https://github.com/cta-observatory/pyeventio
+  license: MIT
+  summary: Community-developed Python Library for Astronomy
+  description: |
+    A Python (read-only) implementation of the EventIO data format invented
+    by Konrad Bernloehr as used for example by the IACT extension for
+    CORSIKA: https://www.ikp.kit.edu/corsika
+
+extra:
+  recipe-maintainers:
+    - kosack
