@@ -30,44 +30,49 @@ build:
 requirements:
   build:
     - {{ compiler('cxx') }}
-    - python >=3
+    - python
     - setuptools
   host:
-    - python >=3
-    - numpy
+    - python 
     - astropy >=1.3
-    - iminuit
-    - pytest-runner
-    - scipy >=0.19
-    - traitlets
-    - psutil
-    - pandas
     - bokeh >=1.0.1
-    - scikit-learn
-    - eventio 
+    - eventio 0.11.0
+    - iminuit
+    - matplotlib
     - numba
+    - numpy
+    - pandas
+    - psutil
+    - pyhessio >=2.1
+    - pytables
+    - pytest-runner
+    - scikit-learn
+    - scipy >=0.19
+    - tqdm
+    - traitlets
   run:
-    - python >=3
+    - python 
     - astropy >=1.3
+    - ctapipe-extra >=0.2.9,<0.3
     - cython
+    - eventio 0.11.*
     - graphviz
     - iminuit
     - matplotlib >=1.3
     - numba
+    - pandas
+    - psutil
+    - pyhessio >=2.1
     - pytables
+    - pytest
+    - pytest-runner
+    - pyyaml
     - pyzmq
     - scikit-image
     - scikit-learn
     - scipy
     - tqdm
     - traitlets
-    - pyyaml
-    - psutil
-    - pytest
-    - ctapipe-extra >=0.2.9,<0.3
-    - pandas
-    - eventio 
-    - pytest-runner
 test:
   imports:
      - ctapipe
