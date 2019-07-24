@@ -1,0 +1,60 @@
+{% set data = load_setup_py_data() %}
+
+package:
+  name: ctapipe
+  
+  version: {{ data['version'] }}
+
+source:
+  git_rev: master
+  git_url: https://github.com/cta-observatory/ctapipe.git
+
+build:
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+  skip: True # [py<36]
+  number: 0
+  entry_points:
+  {% for entry in data['entry_points']['console_scripts'] %}
+    -  {{ entry }}
+  {% endfor %}
+
+
+requirements:
+  build:
+  host:
+    - python {{ python }}
+    - setuptools
+    # dependencies are defined in setup.py
+    # so far this breaks because "tables" package is called "pytables"
+    {% for dep in data['install_requires'] %}
+        {% if dep != 'tables' %}
+    - {{ dep.lower() }}
+        {% endif %}
+    {% endfor %}
+    - pytables
+    
+  run:
+    - python
+    - {{ pin_compatible('numpy') }}
+    # dependencies are defined in setup.py
+    # so far this breaks because "tables" package is called "pytables"
+    {% for dep in data['install_requires'] %}
+        {% if dep != 'tables' %}
+    - {{ dep.lower() }}
+        {% endif %}
+    {% endfor %}
+    - pytables
+
+
+test:
+  requires:
+    - pytest
+    - pytest-cov
+  commands:
+    - pytest 
+    - ctapipe-info --version
+
+about:
+  home: https://github.com/cta-observatory/ctapipe
+  summary: "Low-level Data Processing Pipeline Framework Prototype for CTA"
+  licence: BSD
