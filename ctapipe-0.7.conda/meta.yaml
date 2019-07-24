@@ -32,6 +32,7 @@ requirements:
         {% endif %}
     {% endfor %}
     - pytables
+    - pytest-runner
     
   run:
     - python
@@ -48,11 +49,12 @@ requirements:
 
 test:
   requires:
-    - pytest
-    - pytest-cov
   commands:
-    - pytest 
     - ctapipe-info --version
+  imports:
+    - ctapipe.io
+    - ctapipe.image
+    - ctapipe.reco
 
 about:
   home: https://github.com/cta-observatory/ctapipe
