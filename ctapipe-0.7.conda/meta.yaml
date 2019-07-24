@@ -13,6 +13,7 @@ build:
   script: python setup.py install --single-version-externally-managed --record=record.txt
   skip: True # [py<36]
   number: 0
+  noarch: python
   entry_points:
   {% for entry in data['entry_points']['console_scripts'] %}
     -  {{ entry }}
