@@ -41,11 +41,13 @@ requirements:
     # dependencies are defined in setup.py
     # so far this breaks because "tables" package is called "pytables"
     {% for dep in data['install_requires'] %}
-        {% if dep != 'tables' %}
+        {% if dep.startswith('tables') %}
     - {{ dep.lower() }}
         {% endif %}
     {% endfor %}
-    - pytables
+    - pytables>=3
+    - ctapipe-extra>=0.2.18,<0.3
+
 
 
 test:
