@@ -2,11 +2,10 @@
 
 package:
   name: ctapipe
-  
   version: {{ data['version'] }}
 
 source:
-  git_rev: master
+  git_rev: v0.7.0
   git_url: https://github.com/cta-observatory/ctapipe.git
 
 build:
@@ -26,29 +25,21 @@ requirements:
     - python {{ python }}
     - setuptools
     # dependencies are defined in setup.py
-    # so far this breaks because "tables" package is called "pytables"
+    #   this breaks because "tables" package is called "pytables", hence the replacement
     {% for dep in data['install_requires'] %}
-        {% if dep != 'tables' %}
-    - {{ dep.lower() }}
-        {% endif %}
+    - {{ dep|replace("tables","pytables")|lower() }}
     {% endfor %}
-    - pytables
     - pytest-runner
     
   run:
     - python
     - {{ pin_compatible('numpy') }}
     # dependencies are defined in setup.py
-    # so far this breaks because "tables" package is called "pytables"
+    #   this breaks because "tables" package is called "pytables", hence the replacement
     {% for dep in data['install_requires'] %}
-        {% if dep.startswith('tables') %}
-    - {{ dep.lower() }}
-        {% endif %}
+    - {{ dep|replace("tables","pytables")|lower() }}
     {% endfor %}
-    - pytables>=3
     - ctapipe-extra>=0.2.18,<0.3
-
-
 
 test:
   requires:
