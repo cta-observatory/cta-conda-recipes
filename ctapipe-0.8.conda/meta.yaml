@@ -5,9 +5,9 @@ package:
   version: {{ data['version'] }}
 
 source:
-  #git_rev: v0.7.0
-  #git_url: https://github.com/cta-observatory/ctapipe.git
-  path: /Users/kkosack/Projects/CTA/Working/ctapipe
+  git_rev: v0.8.0
+  git_url: https://github.com/cta-observatory/ctapipe.git
+  
 
 build:
   script: python setup.py install --single-version-externally-managed --record=record.txt
