@@ -1,0 +1,57 @@
+{% set data = load_setup_py_data() %}
+
+package:
+  name: ctapipe
+  version: {{ data['version'] }}
+
+source:
+  #git_rev: v0.7.0
+  #git_url: https://github.com/cta-observatory/ctapipe.git
+  path: /Users/kkosack/Projects/CTA/Working/ctapipe
+
+build:
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+  skip: True # [py<36]
+  number: 0
+  noarch: python
+  entry_points:
+  {% for entry in data['entry_points']['console_scripts'] %}
+    -  {{ entry }}
+  {% endfor %}
+
+
+requirements:
+  build:
+  host:
+    - python {{ python }}
+    - setuptools
+    # dependencies are defined in setup.py
+    #   this breaks because "tables" package is called "pytables", hence the replacement
+    {% for dep in data['install_requires'] %}
+    - {{ dep|replace("tables","pytables")|lower() }}
+    {% endfor %}
+    - pytest-runner
+    
+  run:
+    - python
+    - {{ pin_compatible('numpy') }}
+    # dependencies are defined in setup.py
+    #   this breaks because "tables" package is called "pytables", hence the replacement
+    {% for dep in data['install_requires'] %}
+    - {{ dep|replace("tables","pytables")|lower() }}
+    {% endfor %}
+    - ctapipe-extra>=0.3.0,<0.4
+
+test:
+  requires:
+  commands:
+    - ctapipe-info --version
+  imports:
+    - ctapipe.io
+    - ctapipe.image
+    - ctapipe.reco
+
+about:
+  home: https://github.com/cta-observatory/ctapipe
+  summary: "Low-level Data Processing Pipeline Framework Prototype for CTA"
+  licence: BSD
