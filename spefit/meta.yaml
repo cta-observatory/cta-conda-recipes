@@ -26,12 +26,7 @@ requirements:
     - tqdm
     - pytest-runner
   run:
-    - iminuit
-    - matplotlib
-    - numba
     - numpy
-    - python
-    - scipy
     - tqdm
     - pytest-runner
 
