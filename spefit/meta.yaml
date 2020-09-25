@@ -1,0 +1,55 @@
+{% set name = "spefit" %}
+{% set version = "1.0.1" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  git_rev: v1.0.1
+  git_url: https://gitlab.cta-observatory.org/cta-consortium/aswg/tools/spefit.git
+
+build:
+  number: 0
+  noarch: python
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+
+requirements:
+  host:
+    - iminuit
+    - matplotlib
+    - numba
+    - numpy
+    - pip
+    - python
+    - scipy
+    - tqdm
+    - pytest-runner
+  run:
+    - iminuit
+    - matplotlib
+    - numba
+    - numpy
+    - python
+    - scipy
+    - tqdm
+    - pytest-runner
+
+test:
+  imports:
+    - spefit
+    - spefit.common
+    - spefit.pdf
+  requires:
+    - pytest
+
+about:
+  home: "https://gitlab.cta-observatory.org/cta-consortium/aswg/tools/spefit"
+  license: "BSD3"
+  license_family: "BSD"
+  license_file: "LICENSE"
+  summary: "Fitting of Single Photoelectron Spectra"
+
+extra:
+  recipe-maintainers:
+    - watsonjj
