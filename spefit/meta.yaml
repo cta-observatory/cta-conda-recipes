@@ -27,6 +27,10 @@ requirements:
   run:
     - numpy
     - tqdm
+    - numba
+    - python
+    - scipy
+    - iminuit
     - pytest-runner
 
 test:
