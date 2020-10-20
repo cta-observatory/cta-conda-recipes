@@ -5,7 +5,7 @@ package:
   version: {{ data.get('version') }}
 
 source:
-  git_rev: v1.4.0
+  git_rev: v1.4.1
   git_url: https://github.com/cta-observatory/pyeventio.git
 
 build:
@@ -19,19 +19,18 @@ build:
 
 requirements:
   build:
-    - cython
+    - {{ compiler('c') }}
   host:
-    - python
-    - setuptools
-    - numpy
-    - pytest-runner
+    - python {{ python }}
+    - numpy {{ numpy }}
     - cython
+    - pytest-runner
     - corsikaio 0.2.*
   run:
-    - python
-    - {{ pin_compatible('numpy') }}
+    - python {{ python }}
+    - numpy {{ numpy }}
     - corsikaio 0.2.*
-    
+
 test:
   commands:
     - eventio_print_structure --help
